@@ -10,10 +10,10 @@ import (
 	bm "github.com/bilibili/kratos/pkg/net/http/blademaster"
 )
 
-var svc pb.DemoServer
+var svc pb.ServerServer
 
 // New new a bm server.
-func New(s pb.DemoServer) (engine *bm.Engine, err error) {
+func New(s pb.ServerServer) (engine *bm.Engine, err error) {
 	var (
 		cfg bm.ServerConfig
 		ct paladin.TOML
@@ -26,7 +26,7 @@ func New(s pb.DemoServer) (engine *bm.Engine, err error) {
 	}
 	svc = s
 	engine = bm.DefaultServer(&cfg)
-	pb.RegisterDemoBMServer(engine, s)
+	pb.RegisterServerBMServer(engine, s)
 	initRouter(engine)
 	err = engine.Start()
 	return
